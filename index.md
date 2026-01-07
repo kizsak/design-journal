@@ -13,6 +13,10 @@ A running log of design decisions, debugging sessions, and technical experiments
   → [Read entry](./2026-01-homepage-rebuild.md)
 
 ---
+- **2026-01-08 — Computational Gallery Rebuild: Essay Panels, Carousel Stability, and Content Architecture**  
+  Separated short tool metadata from long-form process writing, stabilized carousel behavior, and introduced reusable essay panels for complex computational works.  
+  → [Read entry](journal/2026-01-stabilizeportfolioaddesssays.md)
+
 
 ## Future Entries
 More entries will be added here as projects evolve.
