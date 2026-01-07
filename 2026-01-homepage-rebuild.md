@@ -9,7 +9,7 @@ This journal documents how I diagnosed the problems, simplified the structure, a
 ---
 
 ## Goals
-- Restore the “light leak” visual atmosphere across pages
+- Restore the light-leak visual atmosphere across pages
 - Ensure all homepage cards are fully clickable
 - Align four cards horizontally on desktop
 - Reduce CSS fragility and interaction bugs
@@ -28,11 +28,11 @@ This journal documents how I diagnosed the problems, simplified the structure, a
 - `pointer-events: none` on `.card__content` prevented text hover and click behavior
 - Absolutely positioned background layers sometimes intercepted clicks
 - `height: 100%` on anchors relied on parent height instead of explicit positioning
-- Too many nested elements increased z-index and stacking-context complexity
+- Excessive nesting increased z-index and stacking-context complexity
 
 ### Design-Level Problems
-- Cards *looked* clickable but didn’t always behave that way
-- Debugging required mentally tracking too many overlapping layers
+- Cards appeared clickable but did not behave reliably
+- Debugging required tracking too many overlapping layers
 - Visual effects were tightly coupled to layout mechanics
 
 ---
@@ -40,19 +40,17 @@ This journal documents how I diagnosed the problems, simplified the structure, a
 ## Key Decisions
 
 ### 1. Simplify the Card Structure
-I reduced each card to a **single `<a>` element** with:
-- a background image
-- a text overlay
-- a gradient overlay via `::after`
+Each card was reduced to a single `<a>` element that:
+- holds the background image
+- contains the text overlay
+- uses a `::after` pseudo-element for shading
 
-This removed the need for nested background divs and reduced z-index issues.
+This eliminated unnecessary wrapper elements and reduced z-index conflicts.
+
+---
 
 ### 2. Make the Entire Card Clickable by Construction
-Instead of relying on height inheritance, I made anchors either:
-- the card itself, or
-- absolutely positioned with `inset: 0`
-
-This guarantees click reliability across browsers.
+Instead of relying on inherited height, links were made structurally responsible for interaction by positioning them explicitly.
 
 ```css
 .card__link {
